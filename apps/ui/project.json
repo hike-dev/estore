@@ -1,7 +1,7 @@
 {
-  "name": "estore",
+  "name": "ui",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/estore/src",
+  "sourceRoot": "apps/ui/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -11,11 +11,11 @@
       "defaultConfiguration": "production",
       "options": {
         "target": "web",
-        "outputPath": "dist/apps/estore",
-        "main": "apps/estore/src/main.tsx",
-        "tsConfig": "apps/estore/tsconfig.app.json",
-        "rspackConfig": "apps/estore/rspack.config.js",
-        "assets": ["apps/estore/src/favicon.ico", "apps/estore/src/assets"]
+        "outputPath": "dist/apps/ui",
+        "main": "apps/ui/src/main.tsx",
+        "tsConfig": "apps/ui/tsconfig.app.json",
+        "rspackConfig": "apps/ui/rspack.config.js",
+        "assets": ["apps/ui/src/favicon.ico", "apps/ui/src/assets"]
       },
       "configurations": {
         "development": {
@@ -31,12 +31,12 @@
     "serve": {
       "executor": "@nx/rspack:dev-server",
       "options": {
-        "buildTarget": "estore:build:development"
+        "buildTarget": "ui:build:development"
       },
       "configurations": {
         "development": {},
         "production": {
-          "buildTarget": "estore:build:production"
+          "buildTarget": "ui:build:production"
         }
       }
     }
