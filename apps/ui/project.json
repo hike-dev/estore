@@ -3,7 +3,6 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/ui/src",
   "projectType": "application",
-  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/rspack:rspack",
@@ -40,5 +39,6 @@
         }
       }
     }
-  }
+  },
+  "tags": ["scope:ui"]
 }

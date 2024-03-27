@@ -18,7 +18,8 @@
       },
       "configurations": {
         "development": {
-          "mode": "development"
+          "mode": "development",
+          "sourceMap": true
         },
         "production": {
           "mode": "production",
@@ -30,7 +31,9 @@
       "executor": "@nrwl/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "api:build"
+        "buildTarget": "api:build",
+        "port": 9229,
+        "inspect": true
       },
       "configurations": {
         "development": {
@@ -63,5 +66,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:api"]
 }
