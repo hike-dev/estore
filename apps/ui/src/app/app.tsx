@@ -15,7 +15,11 @@ export const App = () => (
           <Route path="/">
             <Route path="product">
               <Route index={true} element={<ProductList />} />
-              <Route index={false} path=":id" element={<ProductShow />} />
+              <Route
+                index={false}
+                path=":productId"
+                element={<ProductShow />}
+              />
             </Route>
           </Route>
         </Routes>

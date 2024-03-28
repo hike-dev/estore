@@ -17,15 +17,15 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-export const ProductCard = ({ product }: { product: IProduct }) => (
+export const ProductListCard = ({ product }: { product: IProduct }) => (
   <Root>
-    <CardContent className={productCardClasses.visuals}>
+    <CardContent className={productListCardClasses.visuals}>
       <Link
-        className={productCardClasses.imageLink}
+        className={productListCardClasses.imageLink}
         to={`/product/${product.id}`}
       >
         <CardMedia
-          className={productCardClasses.image}
+          className={productListCardClasses.image}
           component="img"
           width={170}
           height={250}
@@ -33,35 +33,39 @@ export const ProductCard = ({ product }: { product: IProduct }) => (
         />
       </Link>
       <IconButton
-        className={productCardClasses.like}
+        className={productListCardClasses.like}
         aria-label="add to favorites"
       >
         {product.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
       </IconButton>
-      <List className={productCardClasses.tagList}>
+      <List className={productListCardClasses.tagList}>
         {product.tags.map(tag => (
-          <ListItem className={productCardClasses.tag} key={tag}>
+          <ListItem className={productListCardClasses.tag} key={tag}>
             {tag}
           </ListItem>
         ))}
       </List>
       {product.discount ? (
-        <Box className={productCardClasses.discount}>-{product.discount}%</Box>
+        <Box className={productListCardClasses.discount}>
+          -{product.discount}%
+        </Box>
       ) : null}
     </CardContent>
     <Link
-      className={productCardClasses.contentLink}
+      className={productListCardClasses.contentLink}
       to={`/product/${product.id}`}
     >
       <CardHeader
-        className={productCardClasses.header}
+        className={productListCardClasses.header}
         title={product.title}
         subheader={product.brand}
       />
-      <Box className={productCardClasses.price}>
-        <Box className={productCardClasses.priceOriginal}>${product.price}</Box>
+      <Box className={productListCardClasses.price}>
+        <Box className={productListCardClasses.priceOriginal}>
+          ${product.price}
+        </Box>
         {product.discount ? (
-          <Box className={productCardClasses.priceDiscounted}>
+          <Box className={productListCardClasses.priceDiscounted}>
             $
             {Math.round(
               product.price - (product.price / 100) * product.discount,
@@ -73,43 +77,43 @@ export const ProductCard = ({ product }: { product: IProduct }) => (
   </Root>
 );
 
-const PRODUCT_CARD_PREFIX = 'StoreProductCard';
-export const productCardClasses = {
-  imageLink: `${PRODUCT_CARD_PREFIX}-imageLink`,
-  contentLink: `${PRODUCT_CARD_PREFIX}-contentLink`,
-  visuals: `${PRODUCT_CARD_PREFIX}-visuals`,
-  image: `${PRODUCT_CARD_PREFIX}-image`,
-  like: `${PRODUCT_CARD_PREFIX}-like`,
-  tagList: `${PRODUCT_CARD_PREFIX}-tagList`,
-  tag: `${PRODUCT_CARD_PREFIX}-tag`,
-  discount: `${PRODUCT_CARD_PREFIX}-discount`,
-  header: `${PRODUCT_CARD_PREFIX}-header`,
-  price: `${PRODUCT_CARD_PREFIX}-price`,
-  priceOriginal: `${PRODUCT_CARD_PREFIX}-priceOriginal`,
-  priceDiscounted: `${PRODUCT_CARD_PREFIX}-priceDiscounted`,
+const PRODUCT_LIST_CARD_PREFIX = 'StoreProductListCard';
+export const productListCardClasses = {
+  imageLink: `${PRODUCT_LIST_CARD_PREFIX}-imageLink`,
+  contentLink: `${PRODUCT_LIST_CARD_PREFIX}-contentLink`,
+  visuals: `${PRODUCT_LIST_CARD_PREFIX}-visuals`,
+  image: `${PRODUCT_LIST_CARD_PREFIX}-image`,
+  like: `${PRODUCT_LIST_CARD_PREFIX}-like`,
+  tagList: `${PRODUCT_LIST_CARD_PREFIX}-tagList`,
+  tag: `${PRODUCT_LIST_CARD_PREFIX}-tag`,
+  discount: `${PRODUCT_LIST_CARD_PREFIX}-discount`,
+  header: `${PRODUCT_LIST_CARD_PREFIX}-header`,
+  price: `${PRODUCT_LIST_CARD_PREFIX}-price`,
+  priceOriginal: `${PRODUCT_LIST_CARD_PREFIX}-priceOriginal`,
+  priceDiscounted: `${PRODUCT_LIST_CARD_PREFIX}-priceDiscounted`,
 };
 
 const Root = styled(Card, {
-  name: PRODUCT_CARD_PREFIX,
+  name: PRODUCT_LIST_CARD_PREFIX,
   overridesResolver: (props, styles) => styles.root,
 })(({ theme: { spacing } }) => ({
   boxShadow: 'none',
-  [`& .${productCardClasses.imageLink}, & .${productCardClasses.contentLink}`]:
+  [`& .${productListCardClasses.imageLink}, & .${productListCardClasses.contentLink}`]:
     {
       textDecoration: 'none',
       color: 'inherit',
     },
-  [`& .${productCardClasses.visuals}`]: {
+  [`& .${productListCardClasses.visuals}`]: {
     position: 'relative',
     padding: 0,
-    [`& .${productCardClasses.image}`]: {},
-    [`& .${productCardClasses.like}`]: {
+    [`& .${productListCardClasses.image}`]: {},
+    [`& .${productListCardClasses.like}`]: {
       position: 'absolute',
       top: spacing(1),
       right: spacing(1),
       background: '#fff',
     },
-    [`& .${productCardClasses.tagList}`]: {
+    [`& .${productListCardClasses.tagList}`]: {
       position: 'absolute',
       display: 'flex',
       bottom: spacing(1.5),
@@ -117,13 +121,13 @@ const Root = styled(Card, {
       gap: spacing(1),
       padding: 0,
     },
-    [`& .${productCardClasses.tag}`]: {
+    [`& .${productListCardClasses.tag}`]: {
       background: '#fff',
       borderRadius: spacing(0.5),
       padding: spacing(0, 1),
       lineHeight: spacing(3),
     },
-    [`& .${productCardClasses.discount}`]: {
+    [`& .${productListCardClasses.discount}`]: {
       position: 'absolute',
       top: spacing(2),
       left: spacing(1),
@@ -133,7 +137,7 @@ const Root = styled(Card, {
       borderRadius: spacing(0.5),
     },
   },
-  [`& .${productCardClasses.header}`]: {
+  [`& .${productListCardClasses.header}`]: {
     padding: spacing(1, 0),
     [`& .${cardHeaderClasses.content}`]: {
       display: 'flex',
@@ -149,11 +153,11 @@ const Root = styled(Card, {
       fontSize: spacing(1.5),
     },
   },
-  [`& .${productCardClasses.price}`]: {
+  [`& .${productListCardClasses.price}`]: {
     display: 'flex',
     gap: spacing(2),
-    [`& .${productCardClasses.priceOriginal}`]: {},
-    [`& .${productCardClasses.priceDiscounted}`]: {
+    [`& .${productListCardClasses.priceOriginal}`]: {},
+    [`& .${productListCardClasses.priceDiscounted}`]: {
       color: '#d70015',
       fontWeight: 700,
     },

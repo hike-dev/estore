@@ -1,6 +1,8 @@
-import { IProductOption } from './product-option.interface';
+import { IProductColor } from './product-color.interface';
+import { IProductMaterial } from './product-material.interface';
 import { IProductRating } from './product-rating.interface';
 import { IProductShipping } from './product-shipping.interface';
+import { IProductSize } from './product-size.interface';
 
 export interface IProduct {
   id: string;
@@ -12,7 +14,9 @@ export interface IProduct {
   price: number;
   discount?: number;
   rating: IProductRating;
-  options: IProductOption[];
   shipping: IProductShipping;
   tags: string[];
+  availableSize: IProductSize[];
+  availableColor: IProductColor[];
+  availableMaterial: IProductMaterial[];
 }

@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 import { useGetProductsQuery } from '../../features';
 
-import { ProductCard } from './ProductCard';
+import { ProductListCard } from './ProductListCard';
 
 export const ProductList = () => {
   const [page, setPage] = useState(1);
@@ -45,7 +45,7 @@ export const ProductList = () => {
             // key={product.id}
             key={i}
           >
-            <ProductCard product={product} />
+            <ProductListCard product={product} />
           </Grid>
         ))}
       </Grid>

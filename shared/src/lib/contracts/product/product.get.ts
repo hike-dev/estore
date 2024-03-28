@@ -3,9 +3,11 @@ import { IsNumberString } from 'class-validator';
 
 import {
   IProduct,
-  IProductOption,
+  IProductColor,
+  IProductMaterial,
   IProductRating,
   IProductShipping,
+  IProductSize,
 } from '../../interfaces';
 
 export class ProductGetRequest {
@@ -45,7 +47,13 @@ export class ProductGetResponse implements IProduct {
   rating: IProductRating;
 
   @Expose()
-  options: IProductOption[];
+  availableSize: IProductSize[];
+
+  @Expose()
+  availableColor: IProductColor[];
+
+  @Expose()
+  availableMaterial: IProductMaterial[];
 
   @Expose()
   shipping: IProductShipping;

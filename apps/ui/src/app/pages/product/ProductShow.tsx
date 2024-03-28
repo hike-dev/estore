@@ -1,11 +1,32 @@
-import { Box, styled } from '@mui/material';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Container, styled } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-export const ProductShow = () => <Root>Show</Root>;
+import { useGetProductQuery } from '../../features';
 
-const PREFIX = 'StoreProductShow';
+import { ProductShowCard } from './ProductShowCard';
+
+export const ProductShow = () => {
+  const { productId } = useParams();
+  const { data: product, isLoading } = useGetProductQuery(productId!);
+
+  if (isLoading || !product) {
+    return null;
+  }
+
+  return (
+    <Root>
+      <ProductShowCard product={product} />
+    </Root>
+  );
+};
+
+const PRODUCT_SHOW_PREFIX = 'StoreProductShow';
 export const productShowClasses = {};
 
-const Root = styled(Box, {
-  name: PREFIX,
+const Root = styled(Container, {
+  name: PRODUCT_SHOW_PREFIX,
   overridesResolver: (props, styles) => styles.root,
-})(({ theme }) => ({}));
+})(({ theme: { spacing } }) => ({
+  padding: 0,
+}));

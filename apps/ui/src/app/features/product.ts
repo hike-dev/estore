@@ -23,7 +23,7 @@ export const productApi = createApi({
         },
       }),
     }),
-    getProduct: builder.query<IProduct[], string>({
+    getProduct: builder.query<IProduct, string>({
       query: (id: string) => ({
         url: `product/${id}`,
       }),

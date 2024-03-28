@@ -1,5 +1,5 @@
 import { ProductGetRequest, ProductGetResponse } from '@estore/shared';
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Param, Query, Res } from '@nestjs/common';
 import { Response } from 'express';
 
 import { resWrapperUtil } from '../../utils/res-wrapper.util';
@@ -19,6 +19,13 @@ export class ProductController {
         `products ${range.offset}-${range.offset + range.limit}/${count}`,
       );
     }
+
+    return resWrapperUtil(res, data, ProductGetResponse);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string, @Res() res: Response) {
+    const data = await this.productService.findOne(id);
 
     return resWrapperUtil(res, data, ProductGetResponse);
   }
