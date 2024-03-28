@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsNumber, IsNumberString } from 'class-validator';
+import { IsNumberString } from 'class-validator';
 
 import {
   IProduct,
@@ -18,7 +18,7 @@ export class ProductGetRequest {
 
 export class ProductGetResponse implements IProduct {
   @Expose()
-  id: number;
+  id: string;
 
   @Expose()
   title: string;
@@ -49,4 +49,7 @@ export class ProductGetResponse implements IProduct {
 
   @Expose()
   shipping: IProductShipping;
+
+  @Expose()
+  tags: string[];
 }

@@ -3,7 +3,7 @@ import { IProductRating } from './product-rating.interface';
 import { IProductShipping } from './product-shipping.interface';
 
 export interface IProduct {
-  id: number;
+  id: string;
   title: string;
   brand: string;
   details: string;
@@ -14,4 +14,5 @@ export interface IProduct {
   rating: IProductRating;
   options: IProductOption[];
   shipping: IProductShipping;
+  tags: string[];
 }

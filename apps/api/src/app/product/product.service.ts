@@ -8,20 +8,20 @@ export class ProductService {
     offset,
     limit,
   }: ProductGetRequest): Promise<[IProduct[], number]> {
-    const count = Number(offset) + Number(limit);
+    const count = Number(limit);
     const products = faker.helpers.multiple<IProduct>(
       () => ({
-        id: faker.number.int(),
+        id: faker.string.uuid(),
         title: faker.commerce.productName(),
         brand: faker.company.name(),
         details: faker.lorem.words(),
         like: faker.datatype.boolean(),
         photos: faker.helpers.multiple(
-          () => faker.image.urlPicsumPhotos({ height: 50, width: 100 }),
+          () => faker.image.urlPicsumPhotos({ height: 360, width: 250 }),
           { count: 10 },
         ),
-        price: faker.number.int(),
-        discount: faker.number.int({ max: 100, min: 0 }),
+        price: +faker.commerce.price({ dec: 0 }),
+        discount: faker.number.int({ max: 9, min: 0 }) * 10,
         rating: {
           average: faker.number.float({ max: 5, min: 0 }),
           count: faker.number.int(),
@@ -29,7 +29,7 @@ export class ProductService {
         },
         shipping: {
           timeRange: [2, 4],
-          price: +faker.commerce.price({ dec: 0 }),
+          price: +faker.commerce.price({ dec: 0, min: 10, max: 1000 }),
         },
         options: [
           {
@@ -38,6 +38,12 @@ export class ProductService {
             //  faker.color.rgb()
           },
         ],
+        tags: faker.helpers.multiple(() => faker.word.sample(), {
+          count: {
+            min: 0,
+            max: 2,
+          },
+        }),
       }),
       { count },
     );

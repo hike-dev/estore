@@ -1,20 +1,20 @@
-import { AppBar, Container, styled } from '@mui/material';
-import { PropsWithChildren, Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { AppBar, Box, Container, CssBaseline, styled } from '@mui/material';
+import { PropsWithChildren } from 'react';
 
-import { Loading } from './Loading';
+import { Navigation } from './Navigation';
 
 export const Layout = ({ children }: PropsWithChildren) => (
   <Root>
-    <div className={layoutClasses.appFrame}>
+    <CssBaseline />
+    <Box className={layoutClasses.appFrame}>
       <AppBar />
-      <main className={layoutClasses.wrapper}>
-        <div id="main-content" className={layoutClasses.content}>
-          <Suspense fallback={<Loading />}>{children}</Suspense>
-          <Outlet />
-        </div>
-      </main>
-    </div>
+      <Box className={layoutClasses.wrapper} component={'main'}>
+        <Box id="main-content" className={layoutClasses.content}>
+          {children}
+        </Box>
+      </Box>
+      <Navigation />
+    </Box>
   </Root>
 );
 
@@ -23,13 +23,17 @@ export const layoutClasses = {
   appFrame: `${PREFIX}-appFrame`,
   wrapper: `${PREFIX}-wrapper`,
   content: `${PREFIX}-content`,
-
-  title: `${PREFIX}-title`,
-  description: `${PREFIX}-description`,
-  header: `${PREFIX}-header`,
 };
 
 const Root = styled(Container, {
   name: PREFIX,
   overridesResolver: (props, styles) => styles.root,
-})(({ theme }) => ({}));
+})(({ theme: { spacing } }) => ({
+  margin: 0,
+  padding: 0,
+  [`& .${layoutClasses.appFrame}`]: {},
+  [`& .${layoutClasses.wrapper}`]: {
+    marginBottom: spacing(10),
+  },
+  [`& .${layoutClasses.content}`]: {},
+}));
