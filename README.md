@@ -18,7 +18,7 @@ Navigate in browser `http://localhost:4200`
 
 ## Build for production
 
-Run `npx nx build estore` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
+Run `npx nx run-many --target=build --all` to build the application. The build artifacts are stored in the output directory (e.g. `dist/` or `build/`), ready to be deployed.
 
 ## Running tasks
 
