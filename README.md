@@ -12,7 +12,7 @@ comes with a LSP for Vim users.
 
 ## Start the application
 
-Run `npx nx serve estore` to start the development server. Happy coding!
+Run `npx nx run-many --target=serve --all` to start the development server. Happy coding!
 
 Navigate in browser `http://localhost:4200`
 
