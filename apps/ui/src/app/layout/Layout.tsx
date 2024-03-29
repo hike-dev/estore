@@ -1,5 +1,6 @@
 import { AppBar, Box, Container, CssBaseline, styled } from '@mui/material';
 import { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { Navigation } from './Navigation';
 
@@ -10,7 +11,7 @@ export const Layout = ({ children }: PropsWithChildren) => (
       <AppBar />
       <Box className={layoutClasses.wrapper} component={'main'}>
         <Box id="main-content" className={layoutClasses.content}>
-          {children}
+          <Outlet />
         </Box>
       </Box>
       <Navigation />
