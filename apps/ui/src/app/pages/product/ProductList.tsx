@@ -2,12 +2,14 @@ import { IProduct } from '@estore/shared';
 import {
   Search as SearchIcon,
   LocalMallOutlined as LocalMallOutlinedIcon,
+  FilterAltOutlined as FilterAltOutlinedIcon,
 } from '@mui/icons-material';
-import { Box, Grid, IconButton, styled } from '@mui/material';
+import { Box, Button, Grid, IconButton, styled } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { useGetProductsQuery } from '../../features';
+import { AppBar, FilterPanel } from '../../layout';
 
 import { ProductListCard } from './ProductListCard';
 
@@ -18,7 +20,8 @@ export const ProductList = () => {
 
   useEffect(() => {
     if (data) {
-      setProducts(cur => [...cur, ...data]);
+      const [products] = data;
+      setProducts(cur => [...cur, ...products]);
     }
   }, [data]);
 
@@ -29,11 +32,13 @@ export const ProductList = () => {
   if (isLoading || !data) {
     return null;
   }
+  const [, { to, total }] = data;
+  const hasMore = total > to;
   return (
     <Root
       pageStart={1}
       loadMore={nextPage}
-      hasMore={true}
+      hasMore={hasMore}
       initialLoad={false}
       loader={
         <div className="loader" key="loader">
@@ -41,16 +46,9 @@ export const ProductList = () => {
         </div>
       }
     >
-      <Box>
-        <Box>Verve</Box>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
-        <IconButton>
-          <LocalMallOutlinedIcon />
-        </IconButton>
-      </Box>
-      <Grid container padding={2} className={productListClasses.listContainer}>
+      <AppBar />
+      <FilterPanel total={total} />
+      <Grid container className={productListClasses.listContainer}>
         {products?.map((product, i) => (
           <Grid
             item
@@ -76,8 +74,14 @@ const Root = styled(InfiniteScroll, {
   name: PRODUCT_LIST_PREFIX,
   overridesResolver: (props, styles) => styles.root,
 })(({ theme: { spacing } }) => ({
+  gap: spacing(2),
+  display: 'flex',
+  flexDirection: 'column',
+  padding: 0,
+  [`& .${productListClasses.listItem}`]: {},
   [`& .${productListClasses.listContainer}`]: {
     gap: spacing(4, 2),
+    padding: spacing(2),
   },
   [`& .${productListClasses.listItem}`]: {
     width: `calc(50% - ${spacing(1)})`,
