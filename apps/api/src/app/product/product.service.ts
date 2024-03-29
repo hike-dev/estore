@@ -95,21 +95,30 @@ const productGenerate = (): IProduct => ({
     },
   }),
 });
+
 @Injectable()
 export class ProductService {
+  products: IProduct[] = [];
+
+  constructor() {
+    this.products = faker.helpers.multiple<IProduct>(productGenerate, {
+      count: faker.number.int({ min: 50, max: 200 }),
+    });
+  }
+
   async findAll({
     offset,
     limit,
   }: ProductGetRequest): Promise<[IProduct[], number]> {
-    const count = Number(limit);
-    const products = faker.helpers.multiple<IProduct>(productGenerate, {
-      count,
-    });
+    const products = this.products.slice(
+      offset,
+      Number(offset) + Number(limit),
+    );
 
-    return [products, count];
+    return [products, this.products.length];
   }
 
   async findOne(id: string): Promise<IProduct> {
-    return productGenerate();
+    return this.products.find(product => product.id === id);
   }
 }

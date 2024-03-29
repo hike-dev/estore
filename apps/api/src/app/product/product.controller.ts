@@ -16,7 +16,7 @@ export class ProductController {
     if (range) {
       res.setHeader(
         'Content-Range',
-        `products ${range.offset}-${range.offset + range.limit}/${count}`,
+        `products ${range.offset}-${Number(range.offset) + Number(range.limit)}/${count}`,
       );
     }
 

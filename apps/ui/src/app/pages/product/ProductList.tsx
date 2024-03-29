@@ -1,5 +1,9 @@
 import { IProduct } from '@estore/shared';
-import { Grid, styled } from '@mui/material';
+import {
+  Search as SearchIcon,
+  LocalMallOutlined as LocalMallOutlinedIcon,
+} from '@mui/icons-material';
+import { Box, Grid, IconButton, styled } from '@mui/material';
 import { useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
@@ -29,7 +33,7 @@ export const ProductList = () => {
     <Root
       pageStart={1}
       loadMore={nextPage}
-      hasMore={false}
+      hasMore={true}
       initialLoad={false}
       loader={
         <div className="loader" key="loader">
@@ -37,6 +41,15 @@ export const ProductList = () => {
         </div>
       }
     >
+      <Box>
+        <Box>Verve</Box>
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
+        <IconButton>
+          <LocalMallOutlinedIcon />
+        </IconButton>
+      </Box>
       <Grid container padding={2} className={productListClasses.listContainer}>
         {products?.map((product, i) => (
           <Grid
